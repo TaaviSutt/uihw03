@@ -1,6 +1,14 @@
 <template>
   <div id="app">
-    <Iframe></Iframe>
+    <div class="md-layout md-gutter">
+      <div class="md-layout-item">
+        <Iframe></Iframe>
+      </div>
+      <div class="md-layout-item">
+        <h2>bla bla</h2>
+      </div>
+    </div>
+
   </div>
 </template>
 <script>

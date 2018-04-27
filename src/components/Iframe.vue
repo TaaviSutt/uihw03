@@ -6,6 +6,7 @@
         <md-input name="url-address" id="url-address" v-model.trim="urlAddress"/>
       </md-field>
     </div>
+    <button>X</button>
     <div class="scalable scalable-16-9">
       <div class="scalable-content">
         <iframe :src="urlAddress" allowfullscreen></iframe>
@@ -31,11 +32,11 @@
   }
 
   .scalable iframe {
-    height: 75%;
+    height: 100%;
     left: 0;
     position: absolute;
     top: 0;
-    width: 50%;
+    width: 100%;
   }
 
   .scalable .scalable-content {
@@ -44,8 +45,11 @@
   }
 
   .scalable-16-9 .scalable-content {
-    /* Percentage from 9 divided by 16 for ratio of 16:9. */
     padding-bottom: 56.25%;
+  }
+  .button {
+    margin-right: 10px;
   }
 
 </style>
+
