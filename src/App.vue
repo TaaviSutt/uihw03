@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <div class="md-layout md-gutter">
+    <Header></Header>
+    <div class="md-layout md-gutter main-layout">
       <div class="md-layout-item">
         <Iframe></Iframe>
       </div>
       <div class="md-layout-item">
-        <h2>bla bla</h2>
+        <Grading></Grading>
       </div>
     </div>
-
   </div>
 </template>
 <script>
@@ -18,15 +18,22 @@
   import 'vue-material/dist/theme/default.css'
   import VueMaterial from 'vue-material'
   import Iframe from './components/Iframe'
+  import Header from './components/Header'
+  import Grading from './components/Grading'
+  import Vuex from 'vuex'
+  import store from './store'
 
   import './scss/App.scss'
 
   Vue.use(VueMaterial);
+
   export default {
     name: 'App',
+    store,
     components: {
-      Iframe
-
+      Header,
+      Iframe,
+      Grading
     },
     data: () => ({}),
     methods: {}
