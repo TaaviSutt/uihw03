@@ -20,6 +20,7 @@
   import Iframe from './components/Iframe'
   import Header from './components/Header'
   import Grading from './components/Grading'
+  import BasePoints from './components/BasePoints'
   import store from './store'
   import {mapGetters} from "vuex";
 
@@ -33,7 +34,8 @@
     components: {
       Header,
       Iframe,
-      Grading
+      Grading,
+      BasePoints
     },
     data: () => ({}),
     methods: {},
