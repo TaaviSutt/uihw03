@@ -7,10 +7,16 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
+export const DESKTOP = "DESKTOP";
+export const PHONE_LANDSCAPE = "LANDSCAPE";
+export const PHONE_PORTRAIT = "PORTRAIT";
+
 const state = {
   studentName: "",
   homeworkVersion: -1,
-  minimizeHeader: false
+  minimizeHeader: false,
+  screenMode: DESKTOP,
+  fullScreen: false,
 };
 
 export default new Vuex.Store({

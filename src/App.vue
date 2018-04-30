@@ -5,7 +5,7 @@
       <div class="md-layout-item">
         <Iframe></Iframe>
       </div>
-      <div class="md-layout-item">
+      <div class="md-layout-item" v-if="!fullScreen">
         <Grading></Grading>
       </div>
     </div>
@@ -20,8 +20,8 @@
   import Iframe from './components/Iframe'
   import Header from './components/Header'
   import Grading from './components/Grading'
-  import Vuex from 'vuex'
   import store from './store'
+  import {mapGetters} from "vuex";
 
   import './scss/App.scss'
 
@@ -36,6 +36,9 @@
       Grading
     },
     data: () => ({}),
-    methods: {}
+    methods: {},
+    computed: mapGetters(
+      ["fullScreen"]
+    ),
   }
 </script>

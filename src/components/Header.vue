@@ -11,7 +11,7 @@
 
             <md-menu-content>
               <md-button disabled>Elukohast teatamise vorm</md-button>
-              <md-button @click="changeHomeworkVersion(2)">Bürokraatia</md-button>
+              <md-menu-item @click="changeHomeworkVersion(2)" class="match-style">Bürokraatia</md-menu-item>
               <md-button disabled>Hindamisprotseduur</md-button>
             </md-menu-content>
           </md-menu>
@@ -34,7 +34,7 @@
         <div class="toolbar-additional">
           <md-field>
             <label>Student code (ie. ansalt)</label>
-            <md-input v-model="userCode"></md-input>
+            <md-input v-model="userCode"/>
           </md-field>
           <md-button class="md-dense md-raised md-primary" @click="setUserCode(userCode)">Load</md-button>
         </div>
@@ -81,15 +81,20 @@
     background-color: #f3f3f3;
     padding: 10px;
     width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .md-field {
       width: 350px;
-      display: inline-block;
     }
   }
 
+  .md-toolbar-row:first-child {
+    margin-left: 0px;
+  }
+
   .md-toolbar-row {
-    margin-bottom: 20px;
     margin-left: 0px;
   }
 

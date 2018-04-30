@@ -1,7 +1,9 @@
 <template>
-  <div class="grading">
+  <div class="grading" style="transform: translateX(10000px)">
     <md-steppers md-vertical>
       <md-step id="first" md-label="Base points">
+        {{fullScreen}}
+        <md-button @click="playAnimation">Click me</md-button>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias doloribus eveniet quaerat modi cumque quos sed, temporibus nemo eius amet aliquid, illo minus blanditiis tempore, dolores voluptas dolore placeat nulla.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias doloribus eveniet quaerat modi cumque quos sed, temporibus nemo eius amet aliquid, illo minus blanditiis tempore, dolores voluptas dolore placeat nulla.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias doloribus eveniet quaerat modi cumque quos sed, temporibus nemo eius amet aliquid, illo minus blanditiis tempore, dolores voluptas dolore placeat nulla.</p>
@@ -28,12 +30,48 @@
 </template>
 
 <script>
+
+  import { TweenMax } from 'gsap';
+  import {mapGetters} from "vuex";
+
   export default {
     name: 'Grading',
     data: () => ({
 
     }),
-    methods: {}
+    watch: {
+      minimizeHeader(value, oldValue) {
+        if (value !== -1) {
+          this.playAnimation();
+        }
+      },
+      fullScreen(value, oldValue) {
+        console.log(value);
+        if (value !== true) {
+          this.playAnimation();
+        }
+      }
+    },
+    computed: mapGetters(
+      ["minimizeHeader", "currentUserUrl", "fullScreen"]
+    ),
+    beforeMount() {
+      if (this.fullScreen) {
+        TweenMax.to(".grading", 0, {css: {transform: "translateX(" + window.innerWidth + "px)"}, ease: Power4.easeOut});
+      }
+    },
+    mounted() {
+      if (!this.fullScreen && this.minimizeHeader) {
+        this.playAnimation();
+      }
+    },
+    methods: {
+      playAnimation: () => {
+        TweenMax.to(".grading", 0, {css: {transform: "translateX(" + window.innerWidth + "px)"}, ease: Power4.easeOut});
+
+        TweenMax.to(".grading", 1, {css: {transform: "translateX(0px)"}})
+      }
+    }
   }
 </script>
 
