@@ -16,7 +16,7 @@
             </md-menu-content>
           </md-menu>
 
-          <h4 v-if="activeHomeworkVersion !== -1">Homework {{activeHomeworkVersion}}</h4>
+          <h4 v-if="activeHomeworkVersion !== -1">Kodutöö - {{activeHomeworkVersion}} Bürokraatia</h4>
         </div>
 
         <div class="md-toolbar-section-end">
@@ -35,17 +35,17 @@
           <div>
             <md-chips class="md-primary pulse-on-error" v-model="selectedStudents" md-placeholder="Lisa tudeng" :md-limit="2" @md-click="addStudent" md-check-duplicated></md-chips>
           </div>
-          <md-button class="md-dense md-raised md-primary" @click="setUserCode(userCode)">Load</md-button>
+          <span v-bind:class="{active: selectedStudents.length > 0}" class="helper"><md-icon>keyboard_arrow_left</md-icon> valige kodutöö esitaja</span>
 
         </div>
       </div>
     </div>
     <div class="toolbar-wrapper flex" v-if="minimizeHeader">
-      <h3 class="md-title custom-title" style="flex: 1">{{userCode}} - Kodutöö {{activeHomeworkVersion}}</h3>
-      <div>
-        <md-chips v-model="selectedStudents" md-static></md-chips>
+      <h3 class="md-title custom-title" style="flex: 1">Kodutöö {{activeHomeworkVersion}} - Bürokraatia</h3>
+      <div class="center-btn">
+        <md-chip class="md-primary" v-for="chip in selectedStudents" :key="chip">{{ chip }}</md-chip>
       </div>
-      <md-button class="md-icon-button">
+      <md-button class="md-icon-button center-btn">
         <md-icon>settings</md-icon>
       </md-button>
     </div>
@@ -82,13 +82,16 @@
       ),
 
       addStudent: function(event) {
-        for (let i = 0; i < this.allStudents.length; i++) {
-          if (this.allStudents[i].name === event) {
-            this.userCode = this.allStudents[i].uniId;
-            console.log(this.userCode);
-          }
-        }
+        const studentsByName = this.allStudents.filter(item => item.name === event);
+        const studentsByCode = this.allStudents.filter(item => item.uniId === event);
 
+        if (studentsByName.length !== 0) {
+            this.setUserCode(studentsByName[0].uniId);
+        } else if (studentsByCode.length !== 0) {
+          this.setUserCode(studentsByCode[0].uniId);
+        } else {
+          this.setUserCode(event);
+        }
       }
 
     },
@@ -103,8 +106,9 @@
   .toolbar-additional {
     background-color: #f3f3f3;
     padding: 10px;
-    width: 500px;
+    width: 550px;
     display: flex;
+    height: 84px;
     justify-content: center;
     align-items: center;
 
@@ -134,5 +138,24 @@
     text-align: start;
   }
 
+  .center-btn {
+    align-self: center;
+  }
+
+  .helper {
+    opacity: (0);
+    transition: all 0.5s ease-in;
+    color: black;
+    text-transform: UPPERCASE;
+    font-size: 12px;
+
+    > * {
+      color: black !important;
+    }
+
+    &.active {
+      opacity: (1);
+    }
+  }
 </style>
 

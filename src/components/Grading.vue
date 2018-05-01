@@ -1,6 +1,6 @@
 <template>
   <div class="grading" style="transform: translateX(10000px)">
-    <div class="grading-header">
+    <div class="grading-header" @mouseover="gradingAnimationStart" @mouseleave="gradingAnimationEnd">
       <div>
         <h2>
           Bürokraatia
@@ -46,15 +46,13 @@
       <button @click="toggleAll(1)" class="title-parent">
         <div class="text">
           <h3 class="sub-title">
-            Lisaks
+            Lisaülesanded
           </h3>
           <div class="descriptive-text">
             1 punkt iga ülesande eest.
           </div>
         </div>
       </button>
-
-
 
       <ExperimentalGrading :data-index="1">
 
@@ -128,6 +126,12 @@
           },
         },
       ),
+      gradingAnimationStart: () => {
+        TweenMax.to(".grading-header", 0.5, {css: {transform: "rotateY(0deg) rotateX(0deg) rotate(0deg)"}})
+      },
+      gradingAnimationEnd: () => {
+        TweenMax.to(".grading-header", 0.5, {css: {transform: "scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg)"}})
+      },
       playAnimation: () => {
         TweenMax.to(".grading", 0, {css: {transform: "translateX(" + window.innerWidth + "px)"}, ease: Power4.easeOut});
 
