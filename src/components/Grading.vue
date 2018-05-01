@@ -9,7 +9,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="queue">Queue</label>
-                <md-input name="queue" id="queue" v-model="queue"></md-input>
+                <md-input name="queue" id="queue" v-model="basePoints.queue"></md-input>
               </md-field>
             </div>
           </div>
@@ -18,7 +18,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="sorting">Sorting</label>
-                <md-input name="sorting" id="sorting" v-model="sorting"></md-input>
+                <md-input name="sorting" id="sorting" v-model="basePoints.sorting"></md-input>
               </md-field>
             </div>
           </div>
@@ -27,7 +27,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="extra-task">Extra task</label>
-                <md-input name="extraTask" id="extra-task" v-model="extraTask"></md-input>
+                <md-input name="extraTask" id="extra-task" v-model="basePoints.extraTask"></md-input>
               </md-field>
             </div>
           </div>
@@ -36,7 +36,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="lives">Lives</label>
-                <md-input name="lives" id="lives" v-model="lives"></md-input>
+                <md-input name="lives" id="lives" v-model="basePoints.lives"></md-input>
               </md-field>
             </div>
           </div>
@@ -45,7 +45,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="game-end">Game Ending</label>
-                <md-input name="gameEnd" id="game-end" v-model="gameEnd"></md-input>
+                <md-input name="gameEnd" id="game-end" v-model="basePoints.gameEnd"></md-input>
               </md-field>
             </div>
           </div>
@@ -54,7 +54,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="score">Score</label>
-                <md-input name="score" id="score" v-model="score"></md-input>
+                <md-input name="score" id="score" v-model="basePoints.score"></md-input>
               </md-field>
             </div>
           </div>
@@ -63,7 +63,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="new-game">New game</label>
-                <md-input name="newGame" id="new-game" v-model="newGame"></md-input>
+                <md-input name="newGame" id="new-game" v-model="basePoints.newGame"></md-input>
               </md-field>
             </div>
           </div>
@@ -72,7 +72,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="animations">Animations</label>
-                <md-input name="animations" id="animations" v-model="animations"></md-input>
+                <md-input name="animations" id="animations" v-model="basePoints.animations"></md-input>
               </md-field>
             </div>
           </div>
@@ -85,7 +85,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="beautiful-layout">Beautiful Layout</label>
-                <md-input name="beautifulLayout" id="beautiful-layout" v-model="beautifulLayout"></md-input>
+                <md-input name="beautifulLayout" id="beautiful-layout" v-model="bonusPoints.beautifulLayout"></md-input>
               </md-field>
             </div>
           </div>
@@ -94,7 +94,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="layout-theme">Layout according to theme</label>
-                <md-input name="layoutTheme" id="layout-theme" v-model="layoutTheme"></md-input>
+                <md-input name="layoutTheme" id="layout-theme" v-model="bonusPoints.layoutTheme"></md-input>
               </md-field>
             </div>
           </div>
@@ -102,7 +102,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="appearing">Good appearing</label>
-                <md-input name="appearing" id="appearing" v-model="appearing"></md-input>
+                <md-input name="appearing" id="appearing" v-model="bonusPoints.appearing"></md-input>
               </md-field>
             </div>
           </div>
@@ -111,7 +111,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="sorting-feedback">Good sorting feedback</label>
-                <md-input name="sortingFeedback" id="sorting-feedback" v-model="sortingFeedback"></md-input>
+                <md-input name="sortingFeedback" id="sorting-feedback" v-model="bonusPoints.sortingFeedback"></md-input>
               </md-field>
             </div>
           </div>
@@ -120,7 +120,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="extra-task-episode">Extra task is fits in the theme</label>
-                <md-input name="extraTaskEpisode" id="extra-task-episode" v-model="extraTaskEpisode"></md-input>
+                <md-input name="extraTaskEpisode" id="extra-task-episode" v-model="bonusPoints.extraTaskEpisode"></md-input>
               </md-field>
             </div>
           </div>
@@ -129,7 +129,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="fail-feedback">Good feedback when game over</label>
-                <md-input name="failFeedback" id="fail-feedback" v-model="failFeedback"></md-input>
+                <md-input name="failFeedback" id="fail-feedback" v-model="bonusPoints.failFeedback"></md-input>
               </md-field>
             </div>
           </div>
@@ -138,7 +138,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="sounds">Sound feedback</label>
-                <md-input name="sounds" id="sounds" v-model="sounds"></md-input>
+                <md-input name="sounds" id="sounds" v-model="bonusPoints.sounds"></md-input>
               </md-field>
             </div>
           </div>
@@ -147,7 +147,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="learnable">Game is learnable</label>
-                <md-input name="learnable" id="learnable" v-model="learnable"></md-input>
+                <md-input name="learnable" id="learnable" v-model="bonusPoints.learnable"></md-input>
               </md-field>
             </div>
           </div>
@@ -156,7 +156,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="drag-and-drop">Sortable object can be dragged and dropped</label>
-                <md-input name="dragAndDrop" id="drag-and-drop" v-model="dragAndDrop"></md-input>
+                <md-input name="dragAndDrop" id="drag-and-drop" v-model="bonusPoints.dragAndDrop"></md-input>
               </md-field>
             </div>
           </div>
@@ -165,7 +165,7 @@
             <div class="md-layout-item md-small-size-100">
               <md-field>
                 <label for="mobile-phones">Works on mobile phones</label>
-                <md-input name="mobilePhones" id="mobile-phones" v-model="mobilePhones"></md-input>
+                <md-input name="mobilePhones" id="mobile-phones" v-model="bonusPoints.mobilePhones"></md-input>
               </md-field>
             </div>
           </div>
@@ -196,7 +196,31 @@
 
   export default {
     name: 'Grading',
-    data: () => ({}),
+    data: () => ({
+      basePoints: {
+        queue :"",
+        sorting: "",
+        extraTask: "",
+        lives: "",
+        gameEnd: "",
+        score: "",
+        newGame: "",
+        animations: ""
+      },
+      bonusPoints: {
+        beautifulLayout: "",
+        layoutTheme: "",
+        appearing: "",
+        sortingFeedBack: "",
+        extraTaskEpisode: "",
+        failFeedBack: "",
+        sounds: "",
+        learnable: "",
+        dragAndDrop: "",
+        mobilePhones:""
+
+      }
+    }),
     watch: {
       minimizeHeader(value, oldValue) {
         if (value !== -1) {
