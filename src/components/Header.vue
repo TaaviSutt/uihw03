@@ -32,23 +32,28 @@
 
       <div class="md-toolbar-row md-toolbar-offset" v-if="activeHomeworkVersion !== -1">
         <div class="toolbar-additional">
-          <md-field>
+
+          <md-autocomplete v-model="userCode" :md-options="allCodes" :md-open-on-focus="false">
             <label>Student code (ie. ansalt)</label>
-            <md-input v-model="userCode"/>
-          </md-field>
-          <md-button class="md-dense md-raised md-primary" @click="setUserCode(userCode)">Load</md-button>
+          </md-autocomplete>
+          <md-button class="md-dense md-raised md-primary" @click="setUserCode(userCode); addStudent(userCode)">Load
+          </md-button>
+
         </div>
       </div>
     </div>
     <div class="toolbar-wrapper flex" v-if="minimizeHeader">
       <h3 class="md-title custom-title" style="flex: 1">{{userCode}} - Homework {{activeHomeworkVersion}}</h3>
+      <div>
+        <md-chips v-model="selectedStudents" md-placeholder="Lisa tudeng" :md-limit="2"></md-chips>
+      </div>
       <md-button class="md-icon-button">
         <md-icon>settings</md-icon>
       </md-button>
     </div>
-
   </md-toolbar>
 </template>
+
 
 <script>
 
@@ -58,17 +63,36 @@
     name: 'Header',
     data: function () {
       return {
-        userCode: ""
+        userCode: "",
+        allCodes: ["ansalt", "Taavi.Sutt", "MaMets"],
+        allStudents: [
+          {name: "Andreas Saltsberg", uniId: "ansalt"},
+          {name: "Taavi Sutt", uniId: "Taavi.Sutt"},
+          {name: "Madis Mets", uniId: "MaMets"}
+        ],
+        selectedStudents: [],
       }
     },
-    methods: mapActions({
-      changeHomeworkVersion (dispatch, id) {
-        dispatch('setHomeworkVersion', id)
-      },
-      setUserCode (dispatch, name) {
-        dispatch('setUserCode', name)
+    methods: {
+      ...mapActions({
+          changeHomeworkVersion(dispatch, id) {
+            dispatch('setHomeworkVersion', id)
+          },
+          setUserCode(dispatch, name) {
+            dispatch('setUserCode', name);
+          }
+        },
+      ),
+
+      addStudent(id) {
+        for (let i = 0; i < this.allStudents.length; i++) {
+          if (this.allStudents[i].uniId === id) {
+            this.selectedStudents.push(this.allStudents[i].name)
+          }
+        }
+        console.log(this.selectedStudents.length)
       }
-    }),
+    },
     computed: mapGetters(
       ["activeHomeworkVersion", "minimizeHeader"]
     ),
@@ -110,5 +134,6 @@
     align-self: center;
     text-align: start;
   }
+
 </style>
 
