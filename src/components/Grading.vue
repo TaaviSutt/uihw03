@@ -286,6 +286,10 @@
     &:hover {
       opacity: 0.8;
     }
+
+    &:first-child {
+      margin-top: 15px;
+    }
   }
 
 </style>
