@@ -2,9 +2,10 @@
   <div class="grading" style="transform: translateX(10000px)">
     <md-steppers md-vertical>
       <md-step id="first" md-label="Base points">
-        {{fullScreen}}
+        <!--{{fullScreen}}
         <md-button @click="playAnimation">Click me</md-button>
-        <div>
+        -->
+        <div class="stepOneDiv">
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100">
               <md-field>
@@ -80,7 +81,7 @@
       </md-step>
 
       <md-step id="second" md-label="Bonus points">
-        <div>
+        <div class="stepTwoDiv">
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100">
               <md-field>
@@ -264,6 +265,14 @@
     padding: 10px;
     height: 100%;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+  .stepOneDiv {
+    overflow-y: auto;
+    max-height: 50vh;
+  }
+  .stepTwoDiv {
+    overflow-y: auto;
+    max-height: 50vh;
   }
 
 </style>
