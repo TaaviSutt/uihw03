@@ -11,3 +11,5 @@ export const minimizeHeader = state => state.minimizeHeader;
 export const screenMode = state => state.screenMode;
 
 export const fullScreen = state => state.fullScreen;
+
+export const grading = state => state.grading;

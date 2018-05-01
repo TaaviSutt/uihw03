@@ -13,3 +13,7 @@ export const setScreenMode = ({ commit }, payload) => {
 export const toggleScreenWidth = ({ commit }) => {
   commit('fullScreen')
 };
+
+export const toggleGrade = ({ commit }, payload) => {
+  commit("toggleGrade", payload)
+}

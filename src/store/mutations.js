@@ -14,5 +14,8 @@ export default {
   },
   fullScreen(state) {
     state.fullScreen = !state.fullScreen;
+  },
+  toggleGrade(state, payload) {
+    state.grading[payload.dataIndex][payload.index].selected = !state.grading[payload.dataIndex][payload.index].selected;
   }
 }
