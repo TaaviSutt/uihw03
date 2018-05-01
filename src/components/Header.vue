@@ -32,12 +32,10 @@
 
       <div class="md-toolbar-row md-toolbar-offset" v-if="activeHomeworkVersion !== -1">
         <div class="toolbar-additional">
-
-          <md-autocomplete v-model="userCode" :md-options="allCodes" :md-open-on-focus="false">
-            <label>Student code (ie. ansalt)</label>
-          </md-autocomplete>
-          <md-button class="md-dense md-raised md-primary" @click="setUserCode(userCode); addStudent(userCode)">Load
-          </md-button>
+          <div>
+            <md-chips class="md-primary pulse-on-error" v-model="selectedStudents" md-placeholder="Lisa tudeng" :md-limit="2" @md-click="addStudent" md-check-duplicated></md-chips>
+          </div>
+          <md-button class="md-dense md-raised md-primary" @click="setUserCode(userCode)">Load</md-button>
 
         </div>
       </div>
@@ -45,7 +43,7 @@
     <div class="toolbar-wrapper flex" v-if="minimizeHeader">
       <h3 class="md-title custom-title" style="flex: 1">{{userCode}} - Homework {{activeHomeworkVersion}}</h3>
       <div>
-        <md-chips v-model="selectedStudents" md-placeholder="Lisa tudeng" :md-limit="2"></md-chips>
+        <md-chips v-model="selectedStudents" md-static></md-chips>
       </div>
       <md-button class="md-icon-button">
         <md-icon>settings</md-icon>
@@ -64,7 +62,6 @@
     data: function () {
       return {
         userCode: "",
-        allCodes: ["ansalt", "Taavi.Sutt", "MaMets"],
         allStudents: [
           {name: "Andreas Saltsberg", uniId: "ansalt"},
           {name: "Taavi Sutt", uniId: "Taavi.Sutt"},
@@ -84,14 +81,16 @@
         },
       ),
 
-      addStudent(id) {
+      addStudent: function(event) {
         for (let i = 0; i < this.allStudents.length; i++) {
-          if (this.allStudents[i].uniId === id) {
-            this.selectedStudents.push(this.allStudents[i].name)
+          if (this.allStudents[i].name === event) {
+            this.userCode = this.allStudents[i].uniId;
+            console.log(this.userCode);
           }
         }
-        console.log(this.selectedStudents.length)
+
       }
+
     },
     computed: mapGetters(
       ["activeHomeworkVersion", "minimizeHeader"]
