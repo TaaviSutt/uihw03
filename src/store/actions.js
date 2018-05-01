@@ -16,4 +16,8 @@ export const toggleScreenWidth = ({ commit }) => {
 
 export const toggleGrade = ({ commit }, payload) => {
   commit("toggleGrade", payload)
+};
+
+export const toggleAll = ({commit}, payload) => {
+  commit("toggleAll", payload)
 }

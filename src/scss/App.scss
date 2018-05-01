@@ -11,6 +11,16 @@ html,body {
   overflow-x: hidden;
 }
 
+body {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: "pnum";
+  font-feature-settings: "pnum";
+  font-variant-numeric: proportional-nums;
+}
+
 
 #app {
   font-family: 'Roboto', sans-serif;
@@ -225,4 +235,8 @@ input[type="number"] {
 .md-toolbar {
   align-items: center;
   justify-content: center;
+}
+
+.md-toolbar.md-theme-default.md-primary {
+  background-color: #24B47E;
 }

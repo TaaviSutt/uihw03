@@ -5,7 +5,7 @@
         <div class="md-toolbar-section-start">
           <md-menu md-size="medium" md-align-trigger md-close-on-select>
             <md-button md-menu-trigger>
-              Start grading
+              Alusta hindamist
               <md-icon>add_circle</md-icon>
             </md-button>
 
@@ -43,7 +43,7 @@
       </div>
     </div>
     <div class="toolbar-wrapper flex" v-if="minimizeHeader">
-      <h3 class="md-title custom-title" style="flex: 1">{{userCode}} - Homework {{activeHomeworkVersion}}</h3>
+      <h3 class="md-title custom-title" style="flex: 1">{{userCode}} - Kodutöö {{activeHomeworkVersion}}</h3>
       <div>
         <md-chips v-model="selectedStudents" md-placeholder="Lisa tudeng" :md-limit="2"></md-chips>
       </div>

@@ -1,254 +1,83 @@
 <template>
   <div class="grading" style="transform: translateX(10000px)">
-    <h2>
-      Bürokraatia
-    </h2>
+    <div class="grading-header">
+      <div>
+        <h2>
+          Bürokraatia
+        </h2>
 
-    <h3 class="sub-title">
-      Baasülesanne
-    </h3>
-    <div class="descriptive-text">
-      10 punkti kui kõik ülesanded on lahendatud.
+        <div class="date">Kaitsmise kuupäev - {{new Date().toLocaleDateString()}}</div>
+        <div class="grading-feedback">Hindamine</div>
+
+        <div class="feedback-row first">
+          <span>Baasülesanne - </span>
+          <span>{{baseGrades}}/10</span>
+        </div>
+
+        <div class="feedback-row second">
+          <span>Lisaülesanded - </span>
+          <span>{{bonusPoints}}/10</span>
+        </div>
+
+        <div class="total">
+          <span>Kokku - </span>
+          <span>{{animatedTotalFixed}}/20</span>
+        </div>
+      </div>
+
     </div>
 
-    <ExperimentalGrading :data-index="0">
+    <div class="grading-points">
+      <button @click="toggleAll(0)" class="title-parent">
+        <div class="text">
+          <h3 class="sub-title">
+            Baasülesanne
+          </h3>
+          <div class="descriptive-text">
+            10 punkti kui kõik ülesanded on lahendatud.
+          </div>
+        </div>
+      </button>
 
-    </ExperimentalGrading>
+      <ExperimentalGrading :data-index="0">
 
-    <h3 class="sub-title">
-      Lisaks
-    </h3>
-    <div class="descriptive-text">
-      1 punkt iga ülesande eest.
+      </ExperimentalGrading>
+
+      <button @click="toggleAll(1)" class="title-parent">
+        <div class="text">
+          <h3 class="sub-title">
+            Lisaks
+          </h3>
+          <div class="descriptive-text">
+            1 punkt iga ülesande eest.
+          </div>
+        </div>
+      </button>
+
+
+
+      <ExperimentalGrading :data-index="1">
+
+      </ExperimentalGrading>
     </div>
 
-    <ExperimentalGrading :data-index="1">
-
-    </ExperimentalGrading>
-
-    <!--<md-steppers md-vertical>-->
-      <!--<md-step id="first" md-label="Base points">-->
-        <!--<div class="stepOneDiv">-->
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="queue">Queue</label>-->
-                <!--<md-input name="queue" id="queue" v-model="basePoints.queue"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="sorting">Sorting</label>-->
-                <!--<md-input name="sorting" id="sorting" v-model="basePoints.sorting"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="extra-task">Extra task</label>-->
-                <!--<md-input name="extraTask" id="extra-task" v-model="basePoints.extraTask"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="lives">Lives</label>-->
-                <!--<md-input name="lives" id="lives" v-model="basePoints.lives"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="game-end">Game Ending</label>-->
-                <!--<md-input name="gameEnd" id="game-end" v-model="basePoints.gameEnd"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="score">Score</label>-->
-                <!--<md-input name="score" id="score" v-model="basePoints.score"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="new-game">New game</label>-->
-                <!--<md-input name="newGame" id="new-game" v-model="basePoints.newGame"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="animations">Animations</label>-->
-                <!--<md-input name="animations" id="animations" v-model="basePoints.animations"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</md-step>-->
-
-      <!--<md-step id="second" md-label="Bonus points">-->
-        <!--<div class="stepTwoDiv">-->
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="beautiful-layout">Beautiful Layout</label>-->
-                <!--<md-input name="beautifulLayout" id="beautiful-layout" v-model="bonusPoints.beautifulLayout"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="layout-theme">Layout according to theme</label>-->
-                <!--<md-input name="layoutTheme" id="layout-theme" v-model="bonusPoints.layoutTheme"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="appearing">Good appearing</label>-->
-                <!--<md-input name="appearing" id="appearing" v-model="bonusPoints.appearing"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="sorting-feedback">Good sorting feedback</label>-->
-                <!--<md-input name="sortingFeedback" id="sorting-feedback" v-model="bonusPoints.sortingFeedback"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="extra-task-episode">Extra task is fits in the theme</label>-->
-                <!--<md-input name="extraTaskEpisode" id="extra-task-episode" v-model="bonusPoints.extraTaskEpisode"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="fail-feedback">Good feedback when game over</label>-->
-                <!--<md-input name="failFeedback" id="fail-feedback" v-model="bonusPoints.failFeedback"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="sounds">Sound feedback</label>-->
-                <!--<md-input name="sounds" id="sounds" v-model="bonusPoints.sounds"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="learnable">Game is learnable</label>-->
-                <!--<md-input name="learnable" id="learnable" v-model="bonusPoints.learnable"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="drag-and-drop">Sortable object can be dragged and dropped</label>-->
-                <!--<md-input name="dragAndDrop" id="drag-and-drop" v-model="bonusPoints.dragAndDrop"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="md-layout md-gutter">-->
-            <!--<div class="md-layout-item md-small-size-100">-->
-              <!--<md-field>-->
-                <!--<label for="mobile-phones">Works on mobile phones</label>-->
-                <!--<md-input name="mobilePhones" id="mobile-phones" v-model="bonusPoints.mobilePhones"></md-input>-->
-              <!--</md-field>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</md-step>-->
-
-      <!--<md-step id="third" md-label="Penalties">-->
-        <!--<p>-->
-          <!--Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias doloribus eveniet quaerat modi cumque quos sed, temporibus nemo eius amet aliquid, illo minus blanditiis tempore, dolores voluptas dolore placeat nulla.</p>-->
-        <!--<p>-->
-          <!--Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias doloribus eveniet quaerat modi cumque quos sed, temporibus nemo eius amet aliquid, illo minus blanditiis tempore, dolores voluptas dolore placeat nulla.</p>-->
-      <!--</md-step>-->
-
-      <!--<md-step id="fourth" md-label="Total & Feedback">-->
-        <!--<p>-->
-          <!--Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias doloribus eveniet quaerat modi cumque quos sed, temporibus nemo eius amet aliquid, illo minus blanditiis tempore, dolores voluptas dolore placeat nulla.</p>-->
-        <!--<p>-->
-          <!--Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias doloribus eveniet quaerat modi cumque quos sed, temporibus nemo eius amet aliquid, illo minus blanditiis tempore, dolores voluptas dolore placeat nulla.</p>-->
-      <!--</md-step>-->
-    <!--</md-steppers>-->
   </div>
 </template>
 
 <script>
 
   import {TweenMax} from 'gsap';
-  import {mapGetters} from "vuex";
+  import {mapGetters, mapActions} from "vuex";
   import ExperimentalGrading from "./ExperimentalGrading";
 
   export default {
     name: 'Grading',
-    data: () => ({}),
+    data: () => ({
+      animatedTotal: 0
+    }),
     components: {
       ExperimentalGrading
     },
-    data: () => ({
-      basePoints: {
-        queue :"",
-        sorting: "",
-        extraTask: "",
-        lives: "",
-        gameEnd: "",
-        score: "",
-        newGame: "",
-        animations: ""
-      },
-      bonusPoints: {
-        beautifulLayout: "",
-        layoutTheme: "",
-        appearing: "",
-        sortingFeedBack: "",
-        extraTaskEpisode: "",
-        failFeedBack: "",
-        sounds: "",
-        learnable: "",
-        dragAndDrop: "",
-        mobilePhones:""
-      }
-    }),
     watch: {
       minimizeHeader(value, oldValue) {
         if (value !== -1) {
@@ -259,22 +88,46 @@
         if (value !== true) {
           this.playAnimation();
         }
+      },
+      bonusPoints(value, oldValue) {
+        TweenMax.to(this.$data, 0.5, { animatedTotal: value + this.baseGrades });
+      },
+      baseGrades(value, oldValue) {
+        TweenMax.to(this.$data, 0.5, { animatedTotal: value + this.bonusPoints });
       }
     },
-    computed: mapGetters(
-      ["minimizeHeader", "currentUserUrl", "fullScreen"]
+    computed: {...mapGetters(
+      ["minimizeHeader", "currentUserUrl", "fullScreen", "grading"],
     ),
+      baseGrades() {
+        const count = this.grading[0].filter(item => item.selected === true).length;
+        return count === this.grading[0].length ? 10 : count;
+      },
+      bonusPoints() {
+        return this.grading[1].filter(item => item.selected === true).length;
+      },
+      animatedTotalFixed: function() {
+        return this.animatedTotal.toFixed(0);
+      }
+    },
     beforeMount() {
       if (this.fullScreen) {
         TweenMax.to(".grading", 0, {css: {transform: "translateX(" + window.innerWidth + "px)"}, ease: Power4.easeOut});
       }
     },
     mounted() {
+      this.animatedTotal = this.baseGrades + this.bonusPoints;
       if (!this.fullScreen && this.minimizeHeader) {
         this.playAnimation();
       }
     },
     methods: {
+      ...mapActions({
+          toggleAll(dispatch, id) {
+            dispatch('toggleAll', id)
+          },
+        },
+      ),
       playAnimation: () => {
         TweenMax.to(".grading", 0, {css: {transform: "translateX(" + window.innerWidth + "px)"}, ease: Power4.easeOut});
 
@@ -288,8 +141,8 @@
 
   .grading {
     background: white;
-    padding: 25px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
   }
   .stepOneDiv {
     overflow-y: auto;
@@ -314,6 +167,125 @@
 
   .sub-title:not(:first-child) {
     margin-top: 25px;
+  }
+
+  .grading-header {
+    position: sticky;
+    background-color: #24B47E;
+    min-height: 150px;
+    padding: 20px;
+    top: 0;
+    z-index: 100;
+    margin-bottom: 20px;
+    margin-left: -50px;
+    width: 100%;
+    border-radius: 12px;
+    transform: scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg);
+    box-shadow: 1px 1px 5px 0 rgba(26, 26, 67, 0.05), 39px 62.5px 125px -25px rgba(50, 50, 93, 0.5), 23.4px 37.5px 75px -37.5px;
+
+    h2 {
+      color: white;
+    }
+  }
+
+  .grading-points {
+    margin: 0;
+    padding: 25px;
+  }
+
+  .date {
+    color: whitesmoke;
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  .grading-feedback {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 11px;
+    color: white;
+    border-bottom: 1px solid #e6ebf1;
+    text-align: start;
+  }
+
+  .feedback-row {
+    font-size: 13px;
+    font-weight: 400;
+    color: whitesmoke;;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative;
+
+    &.second {
+      padding-bottom: 25px;
+      border-bottom: 2px solid #e6ebf1;
+    }
+
+    &.first:after {
+      content: "";
+      background-color: #f6f9fc;
+      -webkit-transform-origin: center left;
+      transform-origin: center left;
+      height: 1px;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      opacity: 0.5;
+    }
+
+    span:first-child {
+      flex: 1;
+    }
+
+    span:last-child {
+      flex: 1;
+      text-align: left;
+      margin-left: 1em;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+
+  .total {
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative;
+    text-transform: uppercase;
+
+    span:first-child {
+      flex: 1;
+    }
+
+    span:last-child {
+      flex: 1;
+      text-align: left;
+      margin-left: 1em;
+    }
+  }
+
+  .title-parent {
+    margin-top: 35px;
+    display: block;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
 </style>

@@ -17,5 +17,14 @@ export default {
   },
   toggleGrade(state, payload) {
     state.grading[payload.dataIndex][payload.index].selected = !state.grading[payload.dataIndex][payload.index].selected;
+  },
+  toggleAll(state, index) {
+    const values = state.grading[index].filter(item => item.selected);
+    var toChange = true;
+    if (values.length === state.grading[index].length) toChange = false;
+
+    for (var i = 0; i < state.grading[index].length; i++) {
+      state.grading[index][i].selected = toChange;
+    }
   }
 }

@@ -26,8 +26,18 @@
     props: ["selected", "title", "description"],
     data: () => ({
     }),
+    mounted() {
+      if (this.selected) {
+          this.selectAnimation(true);
+      }
+    },
     watch: {
         selected(value, oldValue) {
+          this.selectAnimation(value);
+        }
+    },
+    methods: {
+        selectAnimation(value) {
           if (value === true) {
             TweenMax.to(this.$el.querySelector(".check svg"), 1.5, {css: {opacity: 1, transform: "scale(1)", fill: "#24B47E"}, ease: Elastic.easeOut.config(1, 0.5), delay: 0.05});
             TweenMax.to(this.$el.querySelector(".plus svg"), 1.5, {css: {opacity: 0, transform: "scale(0)"}, ease: Elastic.easeOut.config(1, 0.5)})
@@ -148,6 +158,10 @@
 
   .interactive__option--selected .interactive-option__text>span:first-child {
     color: #159570;
+  }
+
+  .interactive__option:hover .interactive-option__text>span {
+    opacity: .80
   }
 
 </style>
