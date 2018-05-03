@@ -70,10 +70,13 @@
 <style lang="scss" scoped>
 
   .screen-view {
-    height: 100%;
+
     padding: 20px 40px 40px;
     display: flex;
     flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: calc(100vh - 120px);
   }
 
   .screen, .iframe {

@@ -1,6 +1,6 @@
 <template>
-  <div class="grading" style="transform: translateX(10000px)">
-    <div class="grading-header" @mouseover="gradingAnimationStart" @mouseleave="gradingAnimationEnd">
+  <div @mouseover="gradingAnimationStart" @mouseleave="gradingAnimationEnd" class="grading" style="transform: translateX(10000px)">
+    <div class="grading-header">
       <div>
         <h2>
           Bürokraatia
