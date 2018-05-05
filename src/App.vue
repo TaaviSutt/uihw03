@@ -1,13 +1,34 @@
 <template>
   <div id="app">
     <Header></Header>
-    <div class="md-layout md-gutter main-layout">
+    <div class="md-layout md-gutter main-layout" v-if="minimizeHeader">
       <div class="md-layout-item">
         <Iframe></Iframe>
       </div>
       <div class="md-layout-item" v-if="!fullScreen">
         <Grading></Grading>
       </div>
+    </div>
+
+    <div class="table-wrapper" v-if="!minimizeHeader">
+      <md-table v-model="completedSheets" md-card>
+        <md-table-toolbar>
+          <h1 class="md-title">Kaitstud tööd</h1>
+        </md-table-toolbar>
+
+        <md-table-row slot="md-table-row" slot-scope="{ item }">
+          <md-table-cell md-label="Versioon" md-sort-by="homeworkVersion">Kodutöö {{ item.homeworkVersion }} - Bürokraatia</md-table-cell>
+          <md-table-cell md-label="Esitajad" md-sort-by="students">
+            <span v-for="(element, index) in item.students" class="item">
+              <span>{{ element }}{{index + 1 !== item.students.length ? ", " : ""}}</span>
+            </span>
+          </md-table-cell>
+          <md-table-cell md-label="Punktid" md-sort-by="grading">{{ calculatePoints(item.grading) }}</md-table-cell>
+          <md-table-cell md-label="Kommentaarid" md-sort-by="comments">{{ item.comments }}</md-table-cell>
+          <md-table-cell md-label="Plagiaat" md-sort-by="comments">{{ item.duplicate ? "Jah" : "Ei" }}</md-table-cell>
+          <md-table-cell md-label=""><md-button class="md-primary" @click="showSheet(item)">vaata</md-button></md-table-cell>
+        </md-table-row>
+      </md-table>
     </div>
   </div>
 </template>
@@ -22,7 +43,7 @@
   import Grading from './components/Grading'
   import BasePoints from './components/BasePoints'
   import store from './store'
-  import {mapGetters} from "vuex";
+  import {mapGetters, mapActions} from "vuex";
 
   import './scss/App.scss'
 
@@ -38,9 +59,38 @@
       BasePoints
     },
     data: () => ({}),
-    methods: {},
+    methods: {
+      ...mapActions({
+        showSheet(dispatch, sheet) {
+            dispatch('showSheet', sheet);
+          }
+        },
+      ),
+      calculatePoints(grading) {
+        let firstPart = grading[0].filter(item => item.selected).length;
+
+        if (firstPart === grading[0].length) {
+          firstPart = 10;
+        }
+
+        return firstPart  + grading[1].filter(item => item.selected).length
+      },
+    },
     computed: mapGetters(
-      ["fullScreen"]
+      ["fullScreen", "minimizeHeader", "completedSheets"]
     ),
   }
 </script>
+
+<style lang="scss" scoped>
+
+  .table-wrapper {
+    max-width: 1000px;
+    margin: 50px auto 0;
+    > div {
+      padding: 20px;
+    }
+  }
+
+</style>
+

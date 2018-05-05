@@ -41,8 +41,8 @@ input[type="number"] {
 }
 
 .md-card {
-  box-shadow: none !important;
-  overflow: hidden;
+  //box-shadow: none !important;
+  //overflow: hidden;
 }
 .md-icon {
   &.md-size-05 {
@@ -238,4 +238,9 @@ input[type="number"] {
 
 .md-toolbar.md-theme-default.md-primary {
   background-color: #24B47E;
+}
+
+.md-field.md-chips.md-theme-default.md-has-value .md-input {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
 }

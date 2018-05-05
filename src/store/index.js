@@ -11,12 +11,11 @@ export const DESKTOP = "DESKTOP";
 export const PHONE_LANDSCAPE = "LANDSCAPE";
 export const PHONE_PORTRAIT = "PORTRAIT";
 
-const state = {
-  studentName: "",
+const baseTemplate = {
+  students: [],
+  author: "",
   homeworkVersion: -1,
-  minimizeHeader: false,
-  screenMode: DESKTOP,
-  fullScreen: false,
+  late: "late1",
   grading: [
     [
       {title: "Ootejärjekord", description: "Peab nägema ootejärjekorda", selected: false},
@@ -38,7 +37,50 @@ const state = {
       {title: "Lohistamine", description: "Sorditavaid objekte saab lohistada (drag&drop)", selected: false},
       {title: "Mobiil", description: "Töötab ka mobiilil", selected: false}
     ],
-  ]
+  ],
+  duplicate: false,
+  comments: ""
+};
+
+const state = {
+  activeSheet: {
+    ...baseTemplate
+  },
+  completedSheets: [
+    {
+      students: ["Andreas Saltsberg", "Taavi Sutt"],
+      author: "ansalt",
+      homeworkVersion: 2,
+      late: "late2",
+      grading: [
+        [
+          {title: "Ootejärjekord", description: "Peab nägema ootejärjekorda", selected: true},
+          {title: "Sortimine", description: "Lohistamine või klõps", selected: true},
+          {title: "Tähtajaline lisaülesanne", description: "Aeg-ajalt antakse mängijale lihtne lisaülesanne", selected: true},
+          {title: "Elude kaotamine", description: "Kui elud on otsas antakse mängijale mõista et mäng sai läbi", selected: true},
+          {title: "Mängu läbikukkumine", description: "Näidatakse punkte ja võimaldatakse mängu korrata.", selected: true},
+          {title: "Animatsioonid", description: "Kasutaja tähelepanu juhitakse animatsioonidega", selected: true},
+        ],
+        [
+          {title: "Ilus kujundus", description: "Kujundus vastab nõuetele", selected: true},
+          {title: "Kujundus vastavalt teemale", description: "Mängu kujundus toetab teemat", selected: true},
+          {title: "Head ilmumised", description: "Ekraanile ilmumised on loogilised", selected: true},
+          {title: "Sortimise tagasiside", description: "Hea sortimise tagasiside", selected: true},
+          {title: "Episood", description: "Hea lisaülesande \"episood\"", selected: true},
+          {title: "Läbikukkumise tagasiside", description: "Hea läbikukkumiste tagasiside", selected: true},
+          {title: "Heliline tagasiside", description: "Mängu toetab ka heliline tagasiside", selected: true},
+          {title: "Õpetatavus", description: "Mängu õpitavus on hea", selected: true},
+          {title: "Lohistamine", description: "Sorditavaid objekte saab lohistada (drag&drop)", selected: true},
+          {title: "Mobiil", description: "Töötab ka mobiilil", selected: false}
+        ],
+      ],
+      duplicate: false,
+      comments: "Hästi tehtud töö :)"
+    }
+  ],
+  minimizeHeader: false,
+  screenMode: DESKTOP,
+  fullScreen: false,
 };
 
 export default new Vuex.Store({

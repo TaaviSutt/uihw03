@@ -24,17 +24,44 @@
           <span>{{animatedTotalFixed}}/20</span>
         </div>
       </div>
-
     </div>
 
     <div class="grading-points">
+
+      <div class="md-layout md-gutter">
+        <div class="md-layout-item md-small-size-100">
+          <md-field>
+            <label for="late">Hilinemine</label>
+            <md-select v-model="lateValue" name="late" id="late">
+              <md-option value="late1">Töö on esitatud õigeaegselt</md-option>
+              <md-option value="late2">Hilinemine kuni üks nädal (-2p)</md-option>
+              <md-option value="late3">Hilinemine +1 nädal (-5p)</md-option>
+            </md-select>
+          </md-field>
+        </div>
+
+        <div class="md-layout-item md-small-size-100 center-content">
+          <md-checkbox v-model="duplicateValue" class="md-primary warning">Plagiaat <md-icon>warning</md-icon></md-checkbox>
+        </div>
+      </div>
+
+      <md-field>
+        <label>{{!duplicate ? "Kommentaarid" : "Kommentaarid ja plagiaadi info"}}</label>
+        <md-textarea v-model="commentValue" :required="duplicate"></md-textarea>
+      </md-field>
+
       <button @click="toggleAll(0)" class="title-parent">
-        <div class="text">
-          <h3 class="sub-title">
-            Baasülesanne
-          </h3>
-          <div class="descriptive-text">
-            10 punkti kui kõik ülesanded on lahendatud.
+        <div class="title-content">
+          <div class="text">
+            <h3 class="sub-title">
+              Baasülesanne
+            </h3>
+            <div class="descriptive-text">
+              10 punkti kui kõik ülesanded on lahendatud.
+            </div>
+          </div>
+          <div class="select-all">
+            <md-icon>done_all</md-icon>
           </div>
         </div>
       </button>
@@ -44,18 +71,22 @@
       </ExperimentalGrading>
 
       <button @click="toggleAll(1)" class="title-parent">
-        <div class="text">
-          <h3 class="sub-title">
-            Lisaülesanded
-          </h3>
-          <div class="descriptive-text">
-            1 punkt iga ülesande eest.
+        <div class="title-content">
+          <div class="text">
+            <h3 class="sub-title">
+              Lisaülesanded
+            </h3>
+            <div class="descriptive-text">
+              1 punkt iga ülesande eest.
+            </div>
+          </div>
+          <div class="select-all">
+            <md-icon>done_all</md-icon>
           </div>
         </div>
       </button>
 
       <ExperimentalGrading :data-index="1">
-
       </ExperimentalGrading>
     </div>
 
@@ -71,7 +102,9 @@
   export default {
     name: 'Grading',
     data: () => ({
-      animatedTotal: 0
+      animatedTotal: 0,
+      latePoints: 0,
+      showDialog: false
     }),
     components: {
       ExperimentalGrading
@@ -95,8 +128,32 @@
       }
     },
     computed: {...mapGetters(
-      ["minimizeHeader", "currentUserUrl", "fullScreen", "grading"],
+      ["minimizeHeader", "currentUserUrl", "fullScreen", "grading", "comments", "duplicate", "late"],
     ),
+      lateValue: {
+        get () {
+          return this.late;
+        },
+        set (value) {
+          this.setLate(value);
+        }
+      },
+      commentValue: {
+        get () {
+          return this.comments;
+        },
+        set (value) {
+          this.updateComment(value);
+        }
+      },
+      duplicateValue: {
+        get () {
+          return this.duplicate;
+        },
+        set (value) {
+          this.updateDuplicate(value);
+        }
+      },
       baseGrades() {
         const count = this.grading[0].filter(item => item.selected === true).length;
         return count === this.grading[0].length ? 10 : count;
@@ -120,10 +177,20 @@
       }
     },
     methods: {
-      ...mapActions({
+      ...mapActions(
+        {
           toggleAll(dispatch, id) {
             dispatch('toggleAll', id)
           },
+          updateComment(dispatch, value) {
+            dispatch('updateComment', value)
+          },
+          updateDuplicate(dispatch, value) {
+            dispatch('updateDuplicate', value)
+          },
+          setLate(dispatch, value) {
+            dispatch('setLate', value)
+          }
         },
       ),
       gradingAnimationStart: () => {
@@ -286,6 +353,7 @@
     border: none;
     outline: none;
     cursor: pointer;
+    width: 100%;
 
     &:hover {
       opacity: 0.8;
@@ -296,5 +364,29 @@
     }
   }
 
+  .title-content {
+    display: flex;
+    align-items: center;
+  }
+
+  .select-all {
+    margin-left: 20px;
+
+    i.md-icon {
+      color: black;
+    }
+  }
+
+  .center-content {
+    align-self: center;
+
+    > div {
+      float: left;
+    }
+  }
+
+  .warning, .warning i {
+    color: red !important;
+  }
 </style>
 

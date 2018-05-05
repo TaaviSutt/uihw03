@@ -45,6 +45,9 @@
         }
       }
     },
+    mounted() {
+      this.playAnimation();
+    },
     computed: mapGetters(
       ["minimizeHeader", "currentUserUrl", "screenMode", "fullScreen"]
     ),

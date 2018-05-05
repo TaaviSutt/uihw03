@@ -40,11 +40,13 @@
         </div>
       </div>
     </div>
+
     <div class="toolbar-wrapper flex" v-if="minimizeHeader">
       <h3 class="md-title custom-title" style="flex: 1">Kodutöö {{activeHomeworkVersion}} - Bürokraatia</h3>
       <div class="center-btn">
         <md-chip class="md-primary" v-for="chip in selectedStudents" :key="chip">{{ chip }}</md-chip>
       </div>
+      <md-button>Salvesta</md-button>
       <md-button class="md-icon-button center-btn">
         <md-icon>settings</md-icon>
       </md-button>
@@ -67,7 +69,13 @@
           {name: "Taavi Sutt", uniId: "Taavi.Sutt"},
           {name: "Madis Mets", uniId: "MaMets"}
         ],
+        students: [
+          "Andreas Saltsberg (ansalt)",
+          "Taavi Sutt (Taavi.Sutt)",
+          "Hendrig Sellik (Hendrig.Sellik)",
+        ],
         selectedStudents: [],
+        activeStudent: null,
       }
     },
     methods: {
@@ -86,13 +94,13 @@
         const studentsByCode = this.allStudents.filter(item => item.uniId === event);
 
         if (studentsByName.length !== 0) {
-            this.setUserCode(studentsByName[0].uniId);
+          this.setUserCode(studentsByName[0].uniId);
         } else if (studentsByCode.length !== 0) {
           this.setUserCode(studentsByCode[0].uniId);
         } else {
           this.setUserCode(event);
         }
-      }
+      },
 
     },
     computed: mapGetters(
@@ -104,16 +112,46 @@
 <style lang="scss" scoped>
 
   .toolbar-additional {
-    background-color: #f3f3f3;
-    padding: 10px;
+    padding: 0px 10px;
     width: 550px;
     display: flex;
-    height: 84px;
+    height: 40px;
     justify-content: center;
     align-items: center;
 
     .md-field {
       width: 350px;
+    }
+
+    input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: white !important;
+    }
+
+    .md-input {
+      color: white !important;
+      -webkit-text-fill-color: white !important;
+    }
+
+    input::-moz-placeholder { /* Firefox 19+ */
+      color: white !important;
+    }
+    input:-ms-input-placeholder { /* IE 10+ */
+      color: white !important;
+    }
+    input:-moz-placeholder { /* Firefox 18- */
+      color: white !important;
+    }
+
+    input::placeholder {
+      color: white !important;
+    }
+
+    ::placeholder {
+      color: white !important;
+    }
+
+    .md-field.md-theme-default:after {
+      background-color: white;
     }
   }
 
@@ -145,17 +183,22 @@
   .helper {
     opacity: (0);
     transition: all 0.5s ease-in;
-    color: black;
+    color: white;
     text-transform: UPPERCASE;
     font-size: 12px;
 
     > * {
-      color: black !important;
+      color: white !important;
     }
 
     &.active {
       opacity: (1);
     }
+  }
+
+  .md-field.md-theme-default.md-has-value .md-input {
+    color: white !important;
+    -webkit-text-fill-color: white !important;
   }
 </style>
 
