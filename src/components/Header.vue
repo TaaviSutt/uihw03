@@ -47,8 +47,8 @@
       <div class="center-btn">
         <md-chip class="md-primary" v-for="chip in selectedStudents" :key="chip">{{ chip }}</md-chip>
       </div>
-      <md-button v-on:click="goBack()" >Tühista</md-button>
-      <md-button>Salvesta</md-button>
+      <md-button v-on:click="goBack()">Tühista</md-button>
+      <md-button v-on:click="saveGrade()">Salvesta</md-button>
       <md-button class="md-icon-button center-btn">
         <md-icon>settings</md-icon>
       </md-button>
@@ -90,11 +90,26 @@
           },
           showStart(dispatch, value) {
             dispatch("showStart", value)
+          },
+          saveGrading(dispatch, value) {
+            dispatch("saveGrading", value)
           }
         },
       ),
-      goBack: function() {
+      goBack: function () {
         this.selectedStudents = [];
+        this.showStart(false);
+      },
+      saveGrade: function () {
+
+        if (this.duplicateValue === false) {
+          this.saveGrading(this.selectedStudents);
+          this.selectedStudents = [];
+        }
+        else if (this.duplicateValue === true && this.commentValue.length > 0) {
+          this.saveGrading(this.selectedStudents);
+          this.selectedStudents = [];
+        }
         this.showStart(false);
       },
       addStudent: function (event) {
@@ -111,9 +126,20 @@
       },
 
     },
-    computed: mapGetters(
-      ["activeHomeworkVersion", "minimizeHeader"]
+    computed: {...mapGetters(
+      ["activeHomeworkVersion", "minimizeHeader", "comments", "duplicate"]
     ),
+      commentValue: {
+        get() {
+          return this.comments;
+        },
+      },
+      duplicateValue: {
+        get() {
+          return this.duplicate;
+        },
+      },
+  }
   }
 </script>
 

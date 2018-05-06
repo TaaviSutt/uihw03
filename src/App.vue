@@ -23,7 +23,7 @@
               <span>{{ element }}{{index + 1 !== item.students.length ? ", " : ""}}</span>
             </span>
           </md-table-cell>
-          <md-table-cell md-label="Punktid" md-sort-by="grading">{{ calculatePoints(item.grading) }}</md-table-cell>
+          <md-table-cell md-label="Punktid" md-sort-by="grading">{{item.duplicate? 0 : calculatePoints(item.grading) }}</md-table-cell>
           <md-table-cell md-label="Kommentaarid" md-sort-by="comments">{{ item.comments }}</md-table-cell>
           <md-table-cell md-label="Plagiaat" md-sort-by="comments">{{ item.duplicate ? "Jah" : "Ei" }}</md-table-cell>
           <md-table-cell md-label=""><md-button class="md-primary" @click="showSheet(item)">vaata</md-button></md-table-cell>

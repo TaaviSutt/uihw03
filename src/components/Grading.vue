@@ -1,5 +1,6 @@
 <template>
-  <div @mouseover="gradingAnimationStart" @mouseleave="gradingAnimationEnd" class="grading" style="transform: translateX(10000px)">
+  <div @mouseover="gradingAnimationStart" @mouseleave="gradingAnimationEnd" class="grading"
+       style="transform: translateX(10000px)">
     <div class="grading-header">
       <div>
         <h2>
@@ -41,7 +42,9 @@
         </div>
 
         <div class="md-layout-item md-small-size-100 center-content">
-          <md-checkbox v-model="duplicateValue" class="md-primary warning">Plagiaat <md-icon>warning</md-icon></md-checkbox>
+          <md-checkbox v-model="duplicateValue" class="md-primary warning">Plagiaat
+            <md-icon>warning</md-icon>
+          </md-checkbox>
         </div>
       </div>
 
@@ -124,24 +127,29 @@
         }
       },
       bonusPoints(value, oldValue) {
-        TweenMax.to(this.$data, 0.5, { animatedTotal: value + this.baseGrades + this.lateValues });
+        TweenMax.to(this.$data, 0.5, {animatedTotal: value + this.baseGrades + this.lateValues});
       },
       baseGrades(value, oldValue) {
-        TweenMax.to(this.$data, 0.5, { animatedTotal: value + this.bonusPoints + this.lateValues });
+        TweenMax.to(this.$data, 0.5, {animatedTotal: value + this.bonusPoints + this.lateValues});
       },
       lateValues(value, oldValue) {
-        TweenMax.to(this.$data, 0.5, { animatedTotal: value + this.bonusPoints + this.baseGrades });
+        TweenMax.to(this.$data, 0.5, {animatedTotal: value + this.bonusPoints + this.baseGrades});
       },
+      duplicateValues(value, oldValue) {
+        TweenMax.to(this.$data, 0.5, {animatedTotal: value + this.bonusPoints + this.baseGrades});
+      }
+
 
     },
-    computed: {...mapGetters(
-      ["minimizeHeader", "currentUserUrl", "fullScreen", "grading", "comments", "duplicate", "late"],
-    ),
+    computed: {
+      ...mapGetters(
+        ["minimizeHeader", "currentUserUrl", "fullScreen", "grading", "comments", "duplicate", "late"],
+      ),
       lateValue: {
-        get () {
+        get() {
           return this.late;
         },
-        set (value) {
+        set(value) {
           this.setLate(value);
           if (value === "late2") {
             this.latePoints = -2;
@@ -151,21 +159,21 @@
           } else {
             this.latePoints = 0;
           }
-         }
+        }
       },
       commentValue: {
-        get () {
+        get() {
           return this.comments;
         },
-        set (value) {
+        set(value) {
           this.updateComment(value);
         }
       },
       duplicateValue: {
-        get () {
+        get() {
           return this.duplicate;
         },
-        set (value) {
+        set(value) {
           this.updateDuplicate(value);
         }
       },
@@ -177,9 +185,17 @@
         return this.grading[1].filter(item => item.selected === true).length;
       },
       lateValues() {
-      return this.latePoints;
+        return this.latePoints;
       },
-      animatedTotalFixed: function() {
+      duplicateValues() {
+        if (this.duplicateValue) {
+          return (this.baseGrades + this.bonusPoints) * -1
+        } else {
+          return 0
+        }
+      },
+
+      animatedTotalFixed: function () {
         return this.animatedTotal.toFixed(0);
       }
     },
@@ -189,7 +205,7 @@
       }
     },
     mounted() {
-      this.animatedTotal = this.baseGrades + this.bonusPoints;
+      this.animatedTotal = this.baseGrades + this.bonusPoints + this.lateValues;
 
       if (!this.fullScreen && this.minimizeHeader) {
         this.playAnimation();
@@ -235,10 +251,12 @@
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     position: relative;
   }
+
   .stepOneDiv {
     overflow-y: auto;
     max-height: 50vh;
   }
+
   .stepTwoDiv {
     overflow-y: auto;
     max-height: 50vh;
@@ -408,8 +426,9 @@
   .warning, .warning i {
     color: red !important;
   }
+
   .md-error {
-    color:red;
+    color: red;
     opacity: 1;
     padding: 1%;
   }

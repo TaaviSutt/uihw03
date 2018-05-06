@@ -41,3 +41,7 @@ export const setLate = ({commit}, payload) => {
 export const showStart = ({commit}, payload) => {
   commit("showStart", payload)
 };
+
+export const saveGrading = ({commit}, payload) => {
+  commit("saveGrading", payload)
+};

@@ -55,6 +55,10 @@ export default {
         return {...item, selected: false};
       })
     ]
+  },
+  saveGrading(state, value) {
+    state.activeSheet.students = value;
+    state.completedSheets.push(state.activeSheet);
   }
 
 }
