@@ -1,3 +1,5 @@
+import {BASE_TEMPLATE} from "./index"
+
 export default {
   homeworkVersion(state, id) {
     state.activeSheet.homeworkVersion = id;
@@ -39,5 +41,10 @@ export default {
   },
   setLate(state, value) {
     state.activeSheet.late = value;
+  },
+  showStart(state, value) {
+    state.minimizeHeader = value;
+    state.activeSheet = Object.assign(BASE_TEMPLATE);
   }
+
 }

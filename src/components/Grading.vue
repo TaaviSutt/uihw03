@@ -47,7 +47,10 @@
 
       <md-field>
         <label>{{!duplicate ? "Kommentaarid" : "Kommentaarid ja plagiaadi info"}}</label>
-        <md-textarea v-model="commentValue" :required="duplicate"></md-textarea>
+        <md-textarea v-model.trim="commentValue" :required="duplicate" required></md-textarea>
+        <span class="md-error" v-if="duplicateValue && commentValue.length === 0">
+          Kommentaari väli ei tohi olla tühi, kui on märgitud plagiaat
+        </span>
       </md-field>
 
       <button @click="toggleAll(0)" class="title-parent">
@@ -192,6 +195,7 @@
         this.playAnimation();
       }
     },
+
     methods: {
       ...mapActions(
         {
@@ -404,5 +408,11 @@
   .warning, .warning i {
     color: red !important;
   }
+  .md-error {
+    color:red;
+    opacity: 1;
+    padding: 1%;
+  }
+
 </style>
 

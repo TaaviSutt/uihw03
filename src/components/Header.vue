@@ -33,7 +33,8 @@
       <div class="md-toolbar-row md-toolbar-offset" v-if="activeHomeworkVersion !== -1">
         <div class="toolbar-additional">
           <div>
-            <md-chips class="md-primary pulse-on-error" v-model="selectedStudents" md-placeholder="Lisa tudeng" :md-limit="2" @md-click="addStudent" md-check-duplicated></md-chips>
+            <md-chips class="md-primary pulse-on-error" v-model="selectedStudents" md-placeholder="Lisa tudeng"
+                      :md-limit="2" @md-click="addStudent" md-check-duplicated></md-chips>
           </div>
           <span v-bind:class="{active: selectedStudents.length > 0}" class="helper"><md-icon>keyboard_arrow_left</md-icon> valige kodutöö esitaja</span>
 
@@ -46,6 +47,7 @@
       <div class="center-btn">
         <md-chip class="md-primary" v-for="chip in selectedStudents" :key="chip">{{ chip }}</md-chip>
       </div>
+      <md-button v-on:click="goBack()" >Tühista</md-button>
       <md-button>Salvesta</md-button>
       <md-button class="md-icon-button center-btn">
         <md-icon>settings</md-icon>
@@ -85,11 +87,17 @@
           },
           setUserCode(dispatch, name) {
             dispatch('setUserCode', name);
+          },
+          showStart(dispatch, value) {
+            dispatch("showStart", value)
           }
         },
       ),
-
-      addStudent: function(event) {
+      goBack: function() {
+        this.selectedStudents = [];
+        this.showStart(false);
+      },
+      addStudent: function (event) {
         const studentsByName = this.allStudents.filter(item => item.name === event);
         const studentsByCode = this.allStudents.filter(item => item.uniId === event);
 

@@ -41,7 +41,7 @@ const baseTemplate = {
   duplicate: false,
   comments: ""
 };
-
+export const BASE_TEMPLATE = baseTemplate;
 const state = {
   activeSheet: {
     ...baseTemplate
