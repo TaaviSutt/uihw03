@@ -121,11 +121,15 @@
         }
       },
       bonusPoints(value, oldValue) {
-        TweenMax.to(this.$data, 0.5, { animatedTotal: value + this.baseGrades });
+        TweenMax.to(this.$data, 0.5, { animatedTotal: value + this.baseGrades + this.lateValues });
       },
       baseGrades(value, oldValue) {
-        TweenMax.to(this.$data, 0.5, { animatedTotal: value + this.bonusPoints });
-      }
+        TweenMax.to(this.$data, 0.5, { animatedTotal: value + this.bonusPoints + this.lateValues });
+      },
+      lateValues(value, oldValue) {
+        TweenMax.to(this.$data, 0.5, { animatedTotal: value + this.bonusPoints + this.baseGrades });
+      },
+
     },
     computed: {...mapGetters(
       ["minimizeHeader", "currentUserUrl", "fullScreen", "grading", "comments", "duplicate", "late"],
@@ -136,7 +140,15 @@
         },
         set (value) {
           this.setLate(value);
-        }
+          if (value === "late2") {
+            this.latePoints = -2;
+          }
+          else if (value === "late3") {
+            this.latePoints = -5;
+          } else {
+            this.latePoints = 0;
+          }
+         }
       },
       commentValue: {
         get () {
@@ -161,6 +173,9 @@
       bonusPoints() {
         return this.grading[1].filter(item => item.selected === true).length;
       },
+      lateValues() {
+      return this.latePoints;
+      },
       animatedTotalFixed: function() {
         return this.animatedTotal.toFixed(0);
       }
@@ -172,6 +187,7 @@
     },
     mounted() {
       this.animatedTotal = this.baseGrades + this.bonusPoints;
+
       if (!this.fullScreen && this.minimizeHeader) {
         this.playAnimation();
       }
