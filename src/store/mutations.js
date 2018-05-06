@@ -18,8 +18,6 @@ export default {
     state.fullScreen = !state.fullScreen;
   },
   toggleGrade(state, payload) {
-    console.log(state.activeSheet.grading)
-    console.log(state.activeSheet.grading[payload.dataIndex][payload.index].selected)
     state.activeSheet.grading[payload.dataIndex][payload.index].selected = !state.activeSheet.grading[payload.dataIndex][payload.index].selected;
   },
   toggleAll(state, index) {
@@ -38,7 +36,19 @@ export default {
     state.activeSheet.duplicate = value;
   },
   showSheet(state, value) {
-    state.activeSheet = {...value};
+    state.activeSheet = {...Object.assign({}, value)};
+
+    state.activeSheet.grading = [
+      value.grading[0].map((item) => {
+        return {...item};
+      }),
+      value.grading[1].map((item) => {
+        return {...item};
+      })
+    ];
+
+    state.activeSheet.students = value.students.splice();
+
     state.minimizeHeader = true;
   },
   setLate(state, value) {
@@ -54,11 +64,41 @@ export default {
       BASE_TEMPLATE.grading[1].map((item) => {
         return {...item, selected: false};
       })
-    ]
+    ];
+    state.activeSheet.students = BASE_TEMPLATE.students.splice();
   },
-  saveGrading(state, value) {
-    state.activeSheet.students = value;
+  saveGrading(state) {
     state.completedSheets.push(state.activeSheet);
-  }
+  },
+  addStudent(state, payload) {
+    let students = [...payload];
 
+    students = students.map(item => {
+      const studentsByName = state.allStudents.filter(sItem => sItem.name === item);
+      const studentsByCode = state.allStudents.filter(sItem => sItem.uniId === item);
+
+      if (studentsByName.length !== 0) {
+        return studentsByName[0].name;
+      } else if (studentsByCode.length !== 0) {
+        return studentsByCode[0].name;
+      } else {
+        return item;
+      }
+    });
+
+    state.activeSheet.students = [...students];
+  },
+  activeStudentClicked(state, payload) {
+    const studentsByName = state.allStudents.filter(sItem => sItem.name === payload);
+
+    if (studentsByName.length > 0) {
+      state.activeSheet.author = studentsByName[0].uniId;
+    } else {
+      state.activeSheet.author = payload;
+    }
+
+    if (state.activeSheet.homeworkVersion !== -1 && state.activeSheet.author.trim().length > 0) {
+      state.minimizeHeader = true;
+    }
+  }
 }

@@ -45,6 +45,7 @@ export const BASE_TEMPLATE = baseTemplate;
 const state = {
   activeSheet: {
     ...baseTemplate,
+    students: BASE_TEMPLATE.students.splice(),
     grading : [
       BASE_TEMPLATE.grading[0].map((item) => {
         return {...item, selected: false};
@@ -89,6 +90,12 @@ const state = {
   minimizeHeader: false,
   screenMode: DESKTOP,
   fullScreen: false,
+  allStudents: [
+    {name: "Andreas Saltsberg", uniId: "ansalt"},
+    {name: "Taavi Sutt", uniId: "Taavi.Sutt"},
+    {name: "Madis Mets", uniId: "MaMets"},
+    {name: "Hendrig Sellik", uniId: "Hendrig.Sellik"}
+  ],
 };
 
 export default new Vuex.Store({

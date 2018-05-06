@@ -23,3 +23,5 @@ export const comments = state => state.activeSheet.comments;
 export const completedSheets = state => state.completedSheets;
 
 export const late = state => state.activeSheet.late;
+
+export const students = state => state.activeSheet.students;

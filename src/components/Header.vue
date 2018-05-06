@@ -33,10 +33,10 @@
       <div class="md-toolbar-row md-toolbar-offset" v-if="activeHomeworkVersion !== -1">
         <div class="toolbar-additional">
           <div>
-            <md-chips class="md-primary pulse-on-error" v-model="selectedStudents" md-placeholder="Lisa tudeng"
-                      :md-limit="2" @md-click="addStudent" md-check-duplicated></md-chips>
+            <md-chips class="md-primary pulse-on-error" v-model="studentsValue" md-placeholder="Lisa tudeng"
+                      :md-limit="2" @md-click="activeStudentClicked" md-check-duplicated></md-chips>
           </div>
-          <span v-bind:class="{active: selectedStudents.length > 0}" class="helper"><md-icon>keyboard_arrow_left</md-icon> valige kodutöö esitaja</span>
+          <span v-bind:class="{active: studentsValue.length > 0}" class="helper"><md-icon>keyboard_arrow_left</md-icon> valige kodutöö esitaja</span>
 
         </div>
       </div>
@@ -45,7 +45,7 @@
     <div class="toolbar-wrapper flex" v-if="minimizeHeader">
       <h3 class="md-title custom-title" style="flex: 1">Kodutöö {{activeHomeworkVersion}} - Bürokraatia</h3>
       <div class="center-btn">
-        <md-chip class="md-primary" v-for="chip in selectedStudents" :key="chip">{{ chip }}</md-chip>
+        <md-chip class="md-primary" v-for="chip in studentsValue" :key="chip">{{ chip }}</md-chip>
       </div>
       <md-button v-on:click="goBack()">Tühista</md-button>
       <md-button v-on:click="saveGrade()">Salvesta</md-button>
@@ -71,12 +71,11 @@
           {name: "Taavi Sutt", uniId: "Taavi.Sutt"},
           {name: "Madis Mets", uniId: "MaMets"}
         ],
-        students: [
-          "Andreas Saltsberg (ansalt)",
-          "Taavi Sutt (Taavi.Sutt)",
-          "Hendrig Sellik (Hendrig.Sellik)",
-        ],
-        selectedStudents: [],
+//        students: [
+//          "Andreas Saltsberg (ansalt)",
+//          "Taavi Sutt (Taavi.Sutt)",
+//          "Hendrig Sellik (Hendrig.Sellik)",
+//        ],
         activeStudent: null,
       }
     },
@@ -93,41 +92,44 @@
           },
           saveGrading(dispatch, value) {
             dispatch("saveGrading", value)
+          },
+          addStudent(dispatch, value) {
+            dispatch("addStudent", value)
+          },
+          activeStudentClicked(dispatch, value) {
+            dispatch("activeStudentClicked", value)
           }
         },
       ),
       goBack: function () {
-        this.selectedStudents = [];
         this.showStart(false);
       },
       saveGrade: function () {
 
         if (this.duplicateValue === false) {
-          this.saveGrading(this.selectedStudents);
-          this.selectedStudents = [];
+          this.saveGrading();
         }
         else if (this.duplicateValue === true && this.commentValue.length > 0) {
-          this.saveGrading(this.selectedStudents);
-          this.selectedStudents = [];
+          this.saveGrading();
         }
         this.showStart(false);
       },
-      addStudent: function (event) {
-        const studentsByName = this.allStudents.filter(item => item.name === event);
-        const studentsByCode = this.allStudents.filter(item => item.uniId === event);
-
-        if (studentsByName.length !== 0) {
-          this.setUserCode(studentsByName[0].uniId);
-        } else if (studentsByCode.length !== 0) {
-          this.setUserCode(studentsByCode[0].uniId);
-        } else {
-          this.setUserCode(event);
-        }
-      },
+//      addStudent: function (event) {
+//        const studentsByName = this.allStudents.filter(item => item.name === event);
+//        const studentsByCode = this.allStudents.filter(item => item.uniId === event);
+//
+//        if (studentsByName.length !== 0) {
+//          this.setUserCode(studentsByName[0].uniId);
+//        } else if (studentsByCode.length !== 0) {
+//          this.setUserCode(studentsByCode[0].uniId);
+//        } else {
+//          this.setUserCode(event);
+//        }
+//      },
 
     },
     computed: {...mapGetters(
-      ["activeHomeworkVersion", "minimizeHeader", "comments", "duplicate"]
+      ["activeHomeworkVersion", "minimizeHeader", "comments", "duplicate", "students"]
     ),
       commentValue: {
         get() {
@@ -139,6 +141,14 @@
           return this.duplicate;
         },
       },
+      studentsValue: {
+        get() {
+          return this.students;
+        },
+        set(value) {
+          this.addStudent(value);
+        }
+      }
   }
   }
 </script>

@@ -45,3 +45,11 @@ export const showStart = ({commit}, payload) => {
 export const saveGrading = ({commit}, payload) => {
   commit("saveGrading", payload)
 };
+
+export const addStudent = ({commit}, payload) => {
+  commit("addStudent", payload)
+};
+
+export const activeStudentClicked = ({commit}, payload) => {
+  commit("activeStudentClicked", payload)
+};
