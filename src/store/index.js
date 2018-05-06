@@ -44,7 +44,15 @@ const baseTemplate = {
 export const BASE_TEMPLATE = baseTemplate;
 const state = {
   activeSheet: {
-    ...baseTemplate
+    ...baseTemplate,
+    grading : [
+      BASE_TEMPLATE.grading[0].map((item) => {
+        return {...item, selected: false};
+      }),
+      BASE_TEMPLATE.grading[1].map((item) => {
+        return {...item, selected: false};
+      })
+    ]
   },
   completedSheets: [
     {

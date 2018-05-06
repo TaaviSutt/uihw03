@@ -18,6 +18,8 @@ export default {
     state.fullScreen = !state.fullScreen;
   },
   toggleGrade(state, payload) {
+    console.log(state.activeSheet.grading)
+    console.log(state.activeSheet.grading[payload.dataIndex][payload.index].selected)
     state.activeSheet.grading[payload.dataIndex][payload.index].selected = !state.activeSheet.grading[payload.dataIndex][payload.index].selected;
   },
   toggleAll(state, index) {
@@ -44,7 +46,15 @@ export default {
   },
   showStart(state, value) {
     state.minimizeHeader = value;
-    state.activeSheet = Object.assign(BASE_TEMPLATE);
+    state.activeSheet = {...Object.assign({}, BASE_TEMPLATE)};
+    state.activeSheet.grading = [
+      BASE_TEMPLATE.grading[0].map((item) => {
+        return {...item, selected: false};
+      }),
+      BASE_TEMPLATE.grading[1].map((item) => {
+        return {...item, selected: false};
+      })
+    ]
   }
 
 }
