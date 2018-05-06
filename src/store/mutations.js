@@ -16,7 +16,7 @@ export default {
     state.fullScreen = !state.fullScreen;
   },
   toggleGrade(state, payload) {
-    state.grading[payload.dataIndex][payload.index].selected = !state.grading[payload.dataIndex][payload.index].selected;
+    state.activeSheet.grading[payload.dataIndex][payload.index].selected = !state.activeSheet.grading[payload.dataIndex][payload.index].selected;
   },
   toggleAll(state, index) {
     const values = state.activeSheet.grading[index].filter(item => item.selected);
