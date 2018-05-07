@@ -23,7 +23,7 @@
               <span>{{ element }}{{index + 1 !== item.students.length ? ", " : ""}}</span>
             </span>
           </md-table-cell>
-          <md-table-cell md-label="Punktid" md-sort-by="grading">{{item.duplicate? 0 : calculatePoints(item.grading) }}</md-table-cell>
+          <md-table-cell md-label="Punktid" md-sort-by="grading">{{totalPoints(item).points}} <md-icon v-if="!totalPoints(item).passed">error</md-icon></md-table-cell>
           <md-table-cell md-label="Kommentaarid" md-sort-by="comments">{{ item.comments }}</md-table-cell>
           <md-table-cell md-label="Plagiaat" md-sort-by="comments">{{ item.duplicate ? "Jah" : "Ei" }}</md-table-cell>
           <md-table-cell md-label=""><md-button class="md-primary" @click="showSheet(item)">vaata</md-button></md-table-cell>
@@ -77,7 +77,7 @@
       },
     },
     computed: mapGetters(
-      ["fullScreen", "minimizeHeader", "completedSheets"]
+      ["fullScreen", "minimizeHeader", "completedSheets", "totalPoints"]
     ),
   }
 </script>
@@ -89,6 +89,10 @@
     margin: 50px auto 0;
     > div {
       padding: 20px;
+    }
+
+    @media only screen and (max-width: 768px) {
+      width: 100%;
     }
   }
 

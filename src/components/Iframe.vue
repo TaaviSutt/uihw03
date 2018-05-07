@@ -80,6 +80,11 @@
     position: sticky;
     top: 0;
     height: calc(100vh - 120px);
+
+    @media only screen and (max-width: 768px) {
+      padding: 0px;
+      height: calc(100vh);
+    }
   }
 
   .screen, .iframe {
@@ -129,6 +134,10 @@
 
   .controls {
     margin-bottom: 20px;
+
+    @media only screen and (max-width: 768px) {
+      display: none;
+    }
   }
 
   .iframe {

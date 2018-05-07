@@ -90,6 +90,7 @@ const state = {
   minimizeHeader: false,
   screenMode: DESKTOP,
   fullScreen: false,
+  origin: -1,
   allStudents: [
     {name: "Andreas Saltsberg", uniId: "ansalt"},
     {name: "Taavi Sutt", uniId: "Taavi.Sutt"},

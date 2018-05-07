@@ -18,16 +18,6 @@
 
           <h4 v-if="activeHomeworkVersion !== -1">Kodutöö - {{activeHomeworkVersion}} Bürokraatia</h4>
         </div>
-
-        <div class="md-toolbar-section-end">
-          <md-button class="md-icon-button">
-            <md-icon>refresh</md-icon>
-          </md-button>
-
-          <md-button class="md-icon-button">
-            <md-icon>more_vert</md-icon>
-          </md-button>
-        </div>
       </div>
 
       <div class="md-toolbar-row md-toolbar-offset" v-if="activeHomeworkVersion !== -1">
@@ -49,9 +39,6 @@
       </div>
       <md-button v-on:click="goBack()">Tühista</md-button>
       <md-button v-on:click="saveGrade()">Salvesta</md-button>
-      <md-button class="md-icon-button center-btn">
-        <md-icon>settings</md-icon>
-      </md-button>
     </div>
   </md-toolbar>
 </template>
@@ -163,8 +150,16 @@
     justify-content: center;
     align-items: center;
 
+    @media only screen and (max-width: 768px) {
+      width: 100%;
+    }
+
     .md-field {
       width: 350px;
+
+      @media only screen and (max-width: 768px) {
+        width: 100%;
+      }
     }
 
     input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -212,6 +207,10 @@
 
     &.flex {
       display: flex;
+    }
+
+    @media only screen and (max-width: 768px) {
+      flex-direction: column;
     }
   }
 

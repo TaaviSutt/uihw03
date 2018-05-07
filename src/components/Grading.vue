@@ -22,7 +22,7 @@
 
         <div class="total">
           <span>Kokku - </span>
-          <span>{{animatedTotalFixed}}/20</span>
+          <span>{{animatedTotalFixed}}/20 <md-icon class="icon-green" v-if="this.totalPoints().passed">check</md-icon><md-icon class="icon-red" v-if="!this.totalPoints().passed">error_outline</md-icon></span>
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@
 
       <md-field>
         <label>{{!duplicate ? "Kommentaarid" : "Kommentaarid ja plagiaadi info"}}</label>
-        <md-textarea v-model.trim="commentValue" :required="duplicate" required></md-textarea>
+        <md-textarea v-model.trim="commentValue" :required="duplicate"></md-textarea>
         <span class="md-error" v-if="duplicateValue && commentValue.length === 0">
           Kommentaari väli ei tohi olla tühi, kui on märgitud plagiaat
         </span>
@@ -127,23 +127,23 @@
         }
       },
       bonusPoints(value, oldValue) {
-        TweenMax.to(this.$data, 0.5, {animatedTotal: value + this.baseGrades + this.lateValues});
+        TweenMax.to(this.$data, 0.5, {animatedTotal: this.totalPoints().points});
       },
       baseGrades(value, oldValue) {
-        TweenMax.to(this.$data, 0.5, {animatedTotal: value + this.bonusPoints + this.lateValues});
+        TweenMax.to(this.$data, 0.5, {animatedTotal: this.totalPoints().points});
       },
       lateValues(value, oldValue) {
-        TweenMax.to(this.$data, 0.5, {animatedTotal: value + this.bonusPoints + this.baseGrades});
+        TweenMax.to(this.$data, 0.5, {animatedTotal: this.totalPoints().points});
       },
       duplicateValues(value, oldValue) {
-        TweenMax.to(this.$data, 0.5, {animatedTotal: value + this.bonusPoints + this.baseGrades});
+        TweenMax.to(this.$data, 0.5, {animatedTotal: this.totalPoints().points});
       }
 
 
     },
     computed: {
       ...mapGetters(
-        ["minimizeHeader", "currentUserUrl", "fullScreen", "grading", "comments", "duplicate", "late"],
+        ["minimizeHeader", "currentUserUrl", "fullScreen", "grading", "comments", "duplicate", "late", "totalPoints"],
       ),
       lateValue: {
         get() {
@@ -205,7 +205,7 @@
       }
     },
     mounted() {
-      this.animatedTotal = this.baseGrades + this.bonusPoints + this.lateValues;
+      this.animatedTotal = this.totalPoints().points;
 
       if (!this.fullScreen && this.minimizeHeader) {
         this.playAnimation();
@@ -291,6 +291,11 @@
     border-radius: 12px;
     transform: scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg);
     box-shadow: 1px 1px 5px 0 rgba(26, 26, 67, 0.05), 39px 62.5px 125px -25px rgba(50, 50, 93, 0.5), 23.4px 37.5px 75px -37.5px;
+
+    @media only screen and (max-width: 768px) {
+      transform: none;
+      margin-left: 0px;
+    }
 
     h2 {
       color: white;
@@ -431,6 +436,16 @@
     color: red;
     opacity: 1;
     padding: 1%;
+  }
+
+  .icon-green {
+    color: green !important;
+    font-size: 29px !important;
+  }
+
+  .icon-red {
+    color: red !important;
+    font-size: 29px !important;
   }
 
 </style>

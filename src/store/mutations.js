@@ -47,7 +47,9 @@ export default {
       })
     ];
 
-    state.activeSheet.students = value.students.splice();
+    state.origin = state.completedSheets.indexOf(value);
+
+    // state.activeSheet.students = value.students.splice();
 
     state.minimizeHeader = true;
   },
@@ -66,9 +68,14 @@ export default {
       })
     ];
     state.activeSheet.students = BASE_TEMPLATE.students.splice();
+    state.origin = -1;
   },
   saveGrading(state) {
-    state.completedSheets.push(state.activeSheet);
+    if (state.origin === -1) {
+      state.completedSheets.push(state.activeSheet);
+    } else {
+      state.completedSheets[state.origin] = state.activeSheet;
+    }
   },
   addStudent(state, payload) {
     let students = [...payload];
