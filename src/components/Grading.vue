@@ -41,6 +41,16 @@
           </md-field>
         </div>
 
+        <div class="md-layout-item md-small-size-100">
+          <md-field>
+            <label for="extend">Pikendamine</label>
+            <md-select v-model="extendedValue" name="extend" id="extend">
+              <md-option value="extend0"></md-option>
+              <md-option value="extend1">Üks nädal pikendust</md-option>
+            </md-select>
+          </md-field>
+        </div>
+
         <div class="md-layout-item md-small-size-100 center-content">
           <md-checkbox v-model="duplicateValue" class="md-primary warning">Plagiaat
             <md-icon>warning</md-icon>
@@ -143,7 +153,7 @@
     },
     computed: {
       ...mapGetters(
-        ["minimizeHeader", "currentUserUrl", "fullScreen", "grading", "comments", "duplicate", "late", "totalPoints"],
+        ["minimizeHeader", "currentUserUrl", "fullScreen", "grading", "comments", "duplicate", "late", "totalPoints", "extend"],
       ),
       lateValue: {
         get() {
@@ -167,6 +177,15 @@
         },
         set(value) {
           this.updateComment(value);
+        }
+      },
+      extendedValue: {
+        get() {
+          return this.extend;
+
+        },
+        set(value) {
+          this.updateExtended(value);
         }
       },
       duplicateValue: {
@@ -226,6 +245,9 @@
           },
           setLate(dispatch, value) {
             dispatch('setLate', value)
+          },
+          updateExtended(dispatch, value) {
+            dispatch("updateExtended", value)
           }
         },
       ),

@@ -30,6 +30,10 @@ export const updateComment = ({commit}, payload) => {
   commit("updateComment", payload)
 };
 
+export const updateExtended = ({commit}, payload) => {
+  commit("updateExtended", payload)
+};
+
 export const showSheet = ({commit}, payload) => {
   commit("showSheet", payload)
 };

@@ -16,6 +16,7 @@ const baseTemplate = {
   author: "",
   homeworkVersion: -1,
   late: "late1",
+  extend: "extend0",
   grading: [
     [
       {title: "Ootejärjekord", description: "Peab nägema ootejärjekorda", selected: false},
@@ -61,6 +62,7 @@ const state = {
       author: "ansalt",
       homeworkVersion: 2,
       late: "late2",
+      extend: "extend0",
       grading: [
         [
           {title: "Ootejärjekord", description: "Peab nägema ootejärjekorda", selected: true},

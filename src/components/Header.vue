@@ -117,11 +117,16 @@
 
     },
     computed: {...mapGetters(
-      ["activeHomeworkVersion", "minimizeHeader", "comments", "duplicate", "students"]
+      ["activeHomeworkVersion", "minimizeHeader", "comments", "duplicate", "students", "extended"]
     ),
       commentValue: {
         get() {
           return this.comments;
+        },
+      },
+      extendedValue: {
+        get() {
+          return this.extended;
         },
       },
       duplicateValue: {

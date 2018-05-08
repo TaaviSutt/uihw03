@@ -26,6 +26,8 @@ export const late = state => state.activeSheet.late;
 
 export const students = state => state.activeSheet.students;
 
+export const extend = state => state.activeSheet.extend;
+
 export const totalPoints = state => data => {
 
   if (!data) {

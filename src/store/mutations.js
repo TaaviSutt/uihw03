@@ -32,6 +32,9 @@ export default {
   updateComment(state, value) {
     state.activeSheet.comments = value;
   },
+  updateExtended(state, value) {
+    state.activeSheet.extend = value;
+  },
   updateDuplicate(state, value) {
     state.activeSheet.duplicate = value;
   },

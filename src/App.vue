@@ -25,6 +25,7 @@
           </md-table-cell>
           <md-table-cell md-label="Punktid" md-sort-by="grading">{{totalPoints(item).points}} <md-icon v-if="!totalPoints(item).passed">error</md-icon></md-table-cell>
           <md-table-cell md-label="Kommentaarid" md-sort-by="comments">{{ item.comments }}</md-table-cell>
+          <md-table-cell md-label="Pikendatud" md-sort-by="comments">{{ item.extend === "extend1" ? "Üks nädal pikendust" : "" }}</md-table-cell>
           <md-table-cell md-label="Plagiaat" md-sort-by="comments">{{ item.duplicate ? "Jah" : "Ei" }}</md-table-cell>
           <md-table-cell md-label=""><md-button class="md-primary" @click="showSheet(item)">vaata</md-button></md-table-cell>
         </md-table-row>
