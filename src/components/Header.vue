@@ -35,7 +35,8 @@
     <div class="toolbar-wrapper flex" v-if="minimizeHeader">
       <h3 class="md-title custom-title" style="flex: 1">Kodutöö {{activeHomeworkVersion}} - Bürokraatia</h3>
       <div class="center-btn">
-        <md-chip class="md-primary" v-for="chip in studentsValue" :key="chip">{{ chip }}</md-chip>
+        <md-chips class="md-primary pulse-on-error" v-model="studentsValue" md-placeholder="Lisa tudeng"
+                  :md-limit="2" md-check-duplicated></md-chips>
       </div>
       <md-button v-on:click="goBack()">Tühista</md-button>
       <md-button v-on:click="saveGrade()">Salvesta</md-button>
