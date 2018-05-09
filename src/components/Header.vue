@@ -38,8 +38,8 @@
         <md-chips class="md-primary pulse-on-error" v-model="studentsValue" md-placeholder="Lisa tudeng"
                   :md-limit="2" md-check-duplicated></md-chips>
       </div>
-      <md-button v-on:click="goBack()">Tühista</md-button>
-      <md-button v-on:click="saveGrade()">Salvesta</md-button>
+      <md-button v-on:click="goBack()" class="center-btn">Tühista</md-button>
+      <md-button v-on:click="saveGrade()" class="center-btn">Salvesta</md-button>
     </div>
   </md-toolbar>
 </template>
@@ -96,11 +96,12 @@
 
         if (this.duplicateValue === false) {
           this.saveGrading();
+          this.showStart(false);
         }
         else if (this.duplicateValue === true && this.commentValue.length > 0) {
           this.saveGrading();
+          this.showStart(false);
         }
-        this.showStart(false);
       },
 //      addStudent: function (event) {
 //        const studentsByName = this.allStudents.filter(item => item.name === event);

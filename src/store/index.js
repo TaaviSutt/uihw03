@@ -36,7 +36,8 @@ const baseTemplate = {
       {title: "Heliline tagasiside", description: "Mängu toetab ka heliline tagasiside", selected: false},
       {title: "Õpetatavus", description: "Mängu õpitavus on hea", selected: false},
       {title: "Lohistamine", description: "Sorditavaid objekte saab lohistada (drag&drop)", selected: false},
-      {title: "Mobiil", description: "Töötab ka mobiilil", selected: false}
+      {title: "Mobiil", description: "Töötab ka mobiilil", selected: false},
+      {title: "Eeskujulik töö", description: "Korralikult tehtud töö", selected: false},
     ],
   ],
   duplicate: false,
@@ -82,7 +83,8 @@ const state = {
           {title: "Heliline tagasiside", description: "Mängu toetab ka heliline tagasiside", selected: true},
           {title: "Õpetatavus", description: "Mängu õpitavus on hea", selected: true},
           {title: "Lohistamine", description: "Sorditavaid objekte saab lohistada (drag&drop)", selected: true},
-          {title: "Mobiil", description: "Töötab ka mobiilil", selected: false}
+          {title: "Mobiil", description: "Töötab ka mobiilil", selected: false},
+          {title: "Eeskujulik töö", description: "Korralikult tehtud töö", selected: false},
         ],
       ],
       duplicate: false,

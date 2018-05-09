@@ -35,18 +35,9 @@
             <label for="late">Hilinemine</label>
             <md-select v-model="lateValue" name="late" id="late">
               <md-option value="late1">Töö on esitatud õigeaegselt</md-option>
+              <md-option value="late4">Pikendus kuni üks nädal</md-option>
               <md-option value="late2">Hilinemine kuni üks nädal (-2p)</md-option>
               <md-option value="late3">Hilinemine +1 nädal (-5p)</md-option>
-            </md-select>
-          </md-field>
-        </div>
-
-        <div class="md-layout-item md-small-size-100">
-          <md-field>
-            <label for="extend">Pikendamine</label>
-            <md-select v-model="extendedValue" name="extend" id="extend">
-              <md-option value="extend0"></md-option>
-              <md-option value="extend1">Üks nädal pikendust</md-option>
             </md-select>
           </md-field>
         </div>
@@ -142,7 +133,7 @@
       baseGrades(value, oldValue) {
         TweenMax.to(this.$data, 0.5, {animatedTotal: this.totalPoints().points});
       },
-      lateValues(value, oldValue) {
+      lateValue(value, oldValue) {
         TweenMax.to(this.$data, 0.5, {animatedTotal: this.totalPoints().points});
       },
       duplicateValues(value, oldValue) {
@@ -153,7 +144,7 @@
     },
     computed: {
       ...mapGetters(
-        ["minimizeHeader", "currentUserUrl", "fullScreen", "grading", "comments", "duplicate", "late", "totalPoints", "extend"],
+        ["minimizeHeader", "currentUserUrl", "fullScreen", "grading", "comments", "duplicate", "late", "totalPoints"],
       ),
       lateValue: {
         get() {
@@ -177,15 +168,6 @@
         },
         set(value) {
           this.updateComment(value);
-        }
-      },
-      extendedValue: {
-        get() {
-          return this.extend;
-
-        },
-        set(value) {
-          this.updateExtended(value);
         }
       },
       duplicateValue: {
@@ -245,9 +227,6 @@
           },
           setLate(dispatch, value) {
             dispatch('setLate', value)
-          },
-          updateExtended(dispatch, value) {
-            dispatch("updateExtended", value)
           }
         },
       ),
@@ -345,7 +324,7 @@
   }
 
   .feedback-row {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 400;
     color: whitesmoke;;
     display: flex;

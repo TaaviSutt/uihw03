@@ -55,6 +55,10 @@ export const totalPoints = state => data => {
     partThree = 5;
   }
 
+  if (data.late === "late4") {
+    partThree = 0;
+  }
+
   let points = partOne + partTwo - partThree;
 
   if (partOne < 5 || points < 10 || data.duplicate) {

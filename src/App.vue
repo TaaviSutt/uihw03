@@ -18,6 +18,7 @@
 
         <md-table-row slot="md-table-row" slot-scope="{ item }">
           <md-table-cell md-label="Versioon" md-sort-by="homeworkVersion">Kodutöö {{ item.homeworkVersion }} - Bürokraatia</md-table-cell>
+          <md-table-cell md-label="Korras" md-sort-by="good">{{ item.late === "late4" ? "Pikendatud" : totalPoints(item).passed ? "Jah" : "Ei" }}</md-table-cell>
           <md-table-cell md-label="Esitajad" md-sort-by="students">
             <span v-for="(element, index) in item.students" class="item">
               <span>{{ element }}{{index + 1 !== item.students.length ? ", " : ""}}</span>
@@ -25,7 +26,7 @@
           </md-table-cell>
           <md-table-cell md-label="Punktid" md-sort-by="grading">{{totalPoints(item).points}} <md-icon v-if="!totalPoints(item).passed">error</md-icon></md-table-cell>
           <md-table-cell md-label="Kommentaarid" md-sort-by="comments">{{ item.comments }}</md-table-cell>
-          <md-table-cell md-label="Pikendatud" md-sort-by="comments">{{ item.extend === "extend1" ? "Üks nädal pikendust" : "" }}</md-table-cell>
+          <md-table-cell md-label="Hilinemised" md-sort-by="comments">{{ item.late === "late4" ? "Üks nädal pikendust" : item.late === "late3" ? "Hilinemine +1 nädal" : item.late === "late2" ? "Hilinemine kuni 1 nädal" : "Korras"}}</md-table-cell>
           <md-table-cell md-label="Plagiaat" md-sort-by="comments">{{ item.duplicate ? "Jah" : "Ei" }}</md-table-cell>
           <md-table-cell md-label=""><md-button class="md-primary" @click="showSheet(item)">vaata</md-button></md-table-cell>
         </md-table-row>
@@ -86,7 +87,7 @@
 <style lang="scss" scoped>
 
   .table-wrapper {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 50px auto 0;
     > div {
       padding: 20px;
